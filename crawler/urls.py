@@ -1,19 +1,22 @@
 # coding utf8
 from furl import furl
 
-base_url = 'https://api.bevol.cn/search/goods/index3?p=1&keywords=&category=7&state=1'
+base_url = 'https://api.bevol.cn/search/goods/index3?p=0&keywords=&category=11&state=1'
 
+category_index_list = [30,38]
 
-def get_url(url = base_url):
+def get_url(index,p):
 
-	f = furl(url)
+	global base_url
 
-	old_p = int(f.args['p'])
+	f = furl(base_url)
 
-	new_p = old_p + 1
+	f.args['p'] = p
 
-	f.args['p'] = new_p
+	f.args['category'] = category_index_list[index]
 
 	base_url = f.url
+
+	print 'current',base_url
 
 	return base_url
